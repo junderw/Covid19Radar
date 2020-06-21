@@ -37,12 +37,13 @@ namespace Covid19Radar.Services
             => "We need to make use of the keys to keep you healthy.";
 
         // this configuration should be obtained from a server and it should be cached locally/in memory as it may be called multiple times
-        public Task<Configuration> GetConfigurationAsync()
+        public async Task<Configuration> GetConfigurationAsync()
         {
             //=> Task.FromResult(configuration);
-            if (Application.Current.Properties.ContainsKey("ExposureNotificationConfigration"))
+            var storedConfiguration = await SecureStorage.GetAsync("ExposureNotificationConfigration");
+            if (storedConfiguration != null)
             {
-                return Task.FromResult(Utils.DeserializeFromJson<Configuration>(Application.Current.Properties["ExposureNotificationConfigration"].ToString()));
+                return Utils.DeserializeFromJson<Configuration>(storedConfiguration);
             }
 
             configuration = new Configuration
@@ -59,7 +60,7 @@ namespace Covid19Radar.Services
                 DurationAtAttenuationThresholds = new[] { 50, 70 }
             };
 
-            return Task.FromResult(configuration);
+            return await Task.FromResult(configuration);
 
 
         }
