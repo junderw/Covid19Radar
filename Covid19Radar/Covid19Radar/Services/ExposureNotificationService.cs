@@ -10,7 +10,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.ExposureNotifications;
 using Xamarin.Forms;
 
@@ -59,8 +58,8 @@ namespace Covid19Radar.Services
             HttpResponseMessage result = await response;
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                await SecureStorage.SetAsync(AppConstants.StorageKey.ExposureNotificationConfigration,
-                    await result.Content.ReadAsStringAsync());
+                Application.Current.Properties["ExposureNotificationConfigration"] = await result.Content.ReadAsStringAsync();
+                await Application.Current.SavePropertiesAsync();
             }
         }
 

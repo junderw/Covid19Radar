@@ -24,7 +24,6 @@
 
         public static class StorageKey
         {
-            public const string ExposureNotificationConfigration = "ExposureNotificationConfigration";
             public const string Secret = "Secret";
             public const string UserData = "UserData";
         }

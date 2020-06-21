@@ -10,7 +10,6 @@ namespace Covid19Radar.Services
     {
         public async static Task Migrate()
         {
-            await MigratePropetiesToSecureStorage(AppConstants.StorageKey.ExposureNotificationConfigration);
             await MigratePropetiesToSecureStorage(AppConstants.StorageKey.Secret);
             await MigratePropetiesToSecureStorage(AppConstants.StorageKey.UserData);
         }
