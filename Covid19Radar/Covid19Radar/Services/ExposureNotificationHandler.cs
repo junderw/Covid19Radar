@@ -40,7 +40,7 @@ namespace Covid19Radar.Services
         public async Task<Configuration> GetConfigurationAsync()
         {
             //=> Task.FromResult(configuration);
-            var storedConfiguration = await SecureStorage.GetAsync("ExposureNotificationConfigration");
+            var storedConfiguration = await SecureStorage.GetAsync(AppConstants.StorageKey.ExposureNotificationConfigration);
             if (storedConfiguration != null)
             {
                 return Utils.DeserializeFromJson<Configuration>(storedConfiguration);

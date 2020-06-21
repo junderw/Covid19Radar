@@ -59,7 +59,8 @@ namespace Covid19Radar.Services
             HttpResponseMessage result = await response;
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                await SecureStorage.SetAsync("ExposureNotificationConfigration", await result.Content.ReadAsStringAsync());
+                await SecureStorage.SetAsync(AppConstants.StorageKey.ExposureNotificationConfigration,
+                    await result.Content.ReadAsStringAsync());
             }
         }
 
